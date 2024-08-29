@@ -16,7 +16,7 @@ import { useAccount, useNetwork, useSwitchNetwork } from 'wagmi'
 import { fetchBalance } from '@wagmi/core'
 import '../App.css'
 import '../styles/PresaleContainer.css'
-import BLAMAnim from '../icons/blam.gif'
+import siteLogo from '../icons/kamalisa-sitelogo.png'
 import Select from 'react-select'
 import styles from '../styles/container/Container.module.scss'
 import { useWeb3Modal } from '@web3modal/react'
@@ -181,32 +181,15 @@ function Header() {
     <div className="navBar content-container">
       <div className="navBarSection leftNavBarSection">
         <a href="/">
-          <img src={BLAMAnim} alt="logo" className="tokenHeaderAnim" />
+          <img src={siteLogo} alt="logo" className="tokenHeaderAnim" />
         </a>
       </div>
-      <div className="navCountdown">
+      {/* <div className="navCountdown">
         <Countdown />
-      </div>
+      </div> */}
       <div className="navBarSection rightNavBarSection">
-        <a className="navLink" href="/Whitepaper.pdf">
-          {t('main.whitepaper')}
-        </a>
-        <a
-          className="navLink"
-          href="https://bitcoinlamas-blam.gitbook.io/bitcoinlamas-blam/~/changes/zeZfjvYLs7UC1TSVWEM3?r=Bwv7bIHAsicPXjTBvNJ7"
-          target="_blank"
-          rel="noreferrer"
-        >
-          {t('main.GitBook')}
-        </a>
-        <a className="navLink" href="#roadmap">
-          {t('main.Roadmap')}
-        </a>
-        <a className="navLink" href="#faq">
-          {t('main.FAQ')}
-        </a>
         <div className="ButtonContainer">
-          <Select
+          {/* <Select
             value={
               selectedLangs
                 ? {
@@ -258,7 +241,7 @@ function Header() {
                 boxSizing: 'border-box'
               })
             }}
-          />
+          /> */}
           <div className="navConnectButtonBox">
             {!isConnected ? (
               <>
@@ -277,8 +260,7 @@ function Header() {
               </>
             ) : (
               <section className={styles.ConnectWalletSection}>
-                <div className="ChainGroupButton">
-                  {chain?.id === 56 ? (
+                {chain?.id === 56 ? (
                     <button
                       className="navConnectButton"
                       type="submit"
@@ -296,7 +278,6 @@ function Header() {
                       {isLoading && pendingChainId === 56 && ''}
                     </button>
                   )}
-                </div>
               </section>
             )}
           </div>

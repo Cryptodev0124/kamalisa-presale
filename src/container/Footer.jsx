@@ -1,7 +1,19 @@
 import React from 'react'
+import {
+  Paper,
+  Grid,
+  Typography,
+  Box,
+  Zoom,
+  Button,
+  FormControl,
+  InputLabel,
+  OutlinedInput,
+  InputAdornment,
+} from "@material-ui/core";
 import { useTranslation } from 'react-i18next'
 import './i18n'
-import BLAM from '../icons/TokenLogo.png'
+import BLAM from '../icons/kamalisa-sitelogo.png'
 import footerTelegramIcon from '../icons/footer-telegram.svg'
 import footerInstagramIcon from '../icons/instagram.svg'
 import footerXIcon from '../icons/footer-x.svg'
@@ -13,69 +25,40 @@ const Footer = () => {
   const { t } = useTranslation()
 
   return (
-    <section className="footer">
-      <div className="footer-background-container" />
-      <div className="mainWrapper">
-        <div className="footerLogoContainer">
+    <Paper className="footer">
+      <Grid className="footerLogoContainer">
+        <Grid className='footer-logo'>
           <img
             src={BLAM}
-            width="48px"
+            width="160px"
             height="48"
             className="footerLogo"
             alt="BLAM"
           />
-        </div>
-        <div>
-          <div className="footer-row">
-            <div className="socials-row">
-              <a href="https://twitter.com/bitcoinlamas" className="socialIcon">
-                <img src={footerXIcon} alt="X" />
-              </a>
-              <a href="https://t.me/bitcoinlamas" className="socialIcon">
-                <img src={footerTelegramIcon} alt="Telegram" />
-              </a>
-              <a
+        </Grid>
+        <Grid className="footer-row">
+          <div className="socials-row">
+            <a href="https://x.com/KAMALISA47?t=O3Ojsl1aN0LeH0coQC3Xeg&s=09" className="socialIcon">
+              <img src={footerXIcon} alt="X" style={{background: '#000000', borderRadius: '8px'}} />
+            </a>
+            <a href="hhttps://t.me/KAMALISA47" className="socialIcon">
+              <img src={footerTelegramIcon} alt="Telegram" style={{background: '#000000', borderRadius: '8px'}} />
+            </a>
+            {/* <a
                 href="https://www.instagram.com/bitcoinlamas"
                 className="socialIcon"
               >
-                <img
-                  src={footerInstagramIcon}
-                  width="48px"
-                  className="footerInstagram"
-                  alt="Instagram"
-                />
-              </a>
-              {/* <a href="mailto:admin@example.com" className="socialIcon">
-                <img src={footerEmailIcon} />
-              </a>
-              <a href="https://github.com" className="socialIcon">
-                <img src={footerGithubIcon} />
+                <img src={footerInstagramIcon} width="36px" className="footerInstagram" alt="Instagram" />
               </a> */}
-              {/* <a href="https://solidproof.io" style={{ marginLeft: '30px' }}>
-                <img src={solidProof} />
-              </a> */}
-            </div>
           </div>
-        </div>
-        <br />
-        <br />
-        <div>
-          <div className="whitelist-row">
-            <div className="footer-buttons">
-              <a href="/terms" className="footerButton">
-                {t('main.terms')}
-              </a>
-              <a href="privacy" className="footerButton">
-                {t('main.privacy')}
-              </a>
-            </div>
-            <div className="socials-row">
-              <p className="footerText">{t('main.footerCopyright')}</p>
-            </div>
+        </Grid>
+        <Grid className="whitelist-row">
+          <div className="socials-row">
+            <p className="footerText" style={{color: '#000000'}}>{t('main.footerCopyright')}</p>
           </div>
-        </div>
-      </div>
-    </section>
+        </Grid>
+      </Grid>
+    </Paper>
   )
 }
 
