@@ -74,7 +74,7 @@ import Countdown from './Countdown'
 // import Pie from './Pie.jsx'
 import GradientCircularProgressBar from "./GradientCircularProgressBar";
 
-const BNB_PROVIDER_URL = 'https://mainnet.infura.io/v3/'
+const BNB_PROVIDER_URL = 'https://eth.drpc.org'
 let BNBWeb3 = new Web3(new Web3.providers.HttpProvider(BNB_PROVIDER_URL))
 const BnbPresaleAddress = '0xfdad9aad93b2dc442930784f17d31a54e87e1b3c'
 const EthUsdcAddress = '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'
