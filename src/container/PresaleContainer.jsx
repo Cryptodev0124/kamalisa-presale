@@ -74,11 +74,11 @@ import Countdown from './Countdown'
 // import Pie from './Pie.jsx'
 import GradientCircularProgressBar from "./GradientCircularProgressBar";
 
-const BNB_PROVIDER_URL = 'https://bsc-rpc.publicnode.com'
+const BNB_PROVIDER_URL = 'https://mainnet.infura.io/v3/'
 let BNBWeb3 = new Web3(new Web3.providers.HttpProvider(BNB_PROVIDER_URL))
 const BnbPresaleAddress = '0xfdad9aad93b2dc442930784f17d31a54e87e1b3c'
-const BnbUsdcAddress = '0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d'
-const BnbUsdtAddress = '0x55d398326f99059fF775485246999027B3197955'
+const EthUsdcAddress = '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'
+const EthUsdtAddress = '0xdAC17F958D2ee523a2206206994597C13D831ec7'
 const tokenAddress = '0x930908E0Ad1Ef39B6c74426fC187650946C3028f'
 
 const App = () => {
@@ -92,11 +92,11 @@ const App = () => {
   let [confirming, setConfirming] = useState(false)
 
   const [PresaleAddress, setPresaleAddress] = useState(BnbPresaleAddress)
-  const [usdcAddress, setUsdcAddress] = useState(BnbUsdcAddress)
-  const [usdtAddress, setUsdtAddress] = useState(BnbUsdtAddress)
+  const [usdcAddress, setUsdcAddress] = useState(EthUsdcAddress)
+  const [usdtAddress, setUsdtAddress] = useState(EthUsdtAddress)
 
-  const [mainLogo, setMainLogo] = useState(bnb)
-  const [usdcDecimal, setUsdcDecimal] = useState(18)
+  const [mainLogo, setMainLogo] = useState(eth)
+  const [usdcDecimal, setUsdcDecimal] = useState(6)
 
   const [mainWeb3, setMainWeb3] = useState(BNBWeb3)
   const [selectedToken, setSelectToken] = useState(0)
@@ -123,7 +123,7 @@ const App = () => {
   } = useContext(LanguageContext)
   let [code, setCode] = useState()
 
-  const percentage = 65;
+  const [percent, setPercent] = useState(0)
 
   const onConnectWallet = async () => {
     await open()
@@ -145,13 +145,13 @@ const App = () => {
   useEffect(() => {
     const switchChain = async () => {
       try {
-        switchNetwork?.(56)
+        switchNetwork?.(1)
       } catch(e) {
         console.error(e)
       }
     }
     if(isConnected === true) {
-      if(chain.id !== 56) switchChain()
+      if(chain.id !== 1) switchChain()
     }
   }, [isConnected, chain?.id, switchNetwork])
 
@@ -160,15 +160,15 @@ const App = () => {
       try {
         setMainWeb3(BNBWeb3)
         setPresaleAddress(BnbPresaleAddress)
-        setUsdcAddress(BnbUsdcAddress)
-        setUsdtAddress(BnbUsdtAddress)
-        setMainLogo(bnb)
-        setUsdcDecimal(18)
+        setUsdcAddress(EthUsdcAddress)
+        setUsdtAddress(EthUsdtAddress)
+        setMainLogo(eth)
+        setUsdcDecimal(6)
       } catch(e) {
         console.error(e)
       }
     }
-    if(chain?.id === 56) {
+    if(chain?.id === 1) {
       setChainData()
     }
   }, [chain?.id])
@@ -291,6 +291,7 @@ const App = () => {
       const Amount = Number(presaleData[7])
       setRaisedAmount(Amount)
       const percent = (Number(raisedAmount) * 100) / totalAmount
+      setPercent(percent)
       const prog = percent.toFixed(3) + '%'
       setProgress(prog)
     } catch(err) {
@@ -374,7 +375,7 @@ const App = () => {
       try {
         if(address) {
           if(selectedToken === 0) {
-            setSelectedTokenName('BNB')
+            setSelectedTokenName('ETH')
             // eslint-disable-next-line react-hooks/exhaustive-deps
             accountBalance = await fetchBalance({ address: address })
             setAccountBalance(accountBalance.formatted)
@@ -463,6 +464,7 @@ const App = () => {
     const fetchProgress = async () => {
       try {
         const percent = (Number(raisedAmount) * 100) / totalAmount
+        setPercent(percent)
         const prog = percent.toFixed(3) + '%'
         setProgress(prog)
       } catch(e) {
@@ -737,7 +739,7 @@ const App = () => {
                       </>
                     ) : (
                       <section className={styles.ConnectWalletSection}>
-                        {chain?.id === 56 ? (
+                        {chain?.id === 1 ? (
                           <button
                             className="navConnectButton"
                             type="submit"
@@ -749,10 +751,10 @@ const App = () => {
                           <button
                             className="navConnectButton"
                             type="submit"
-                            onClick={() => switchNetwork?.(56)}
+                            onClick={() => switchNetwork?.(1)}
                           >
-                            {'BSC'}
-                            {isLoading && pendingChainId === 56 && ''}
+                            {'ETHEREUM'}
+                            {isLoading && pendingChainId === 1 && ''}
                           </button>
                         )}
                       </section>
@@ -783,7 +785,7 @@ const App = () => {
                         onClick={ETHSelect}
                       >
                         <img className="tokenImage" src={mainLogo} />
-                        <span className="tokenButtonText">{'BNB'}</span>
+                        <span className="tokenButtonText">{'ETH'}</span>
                       </button>
                     ) : (
                       <button
@@ -791,7 +793,7 @@ const App = () => {
                         onClick={ETHSelect}
                       >
                         <img className="tokenImage" src={mainLogo} />
-                        <span className="tokenButtonText">{'BNB'}</span>
+                        <span className="tokenButtonText">{'ETH'}</span>
                       </button>
                     )}
                     {selectedToken === 1 ? (
@@ -982,7 +984,7 @@ const App = () => {
                               <section className="LockBox">
                                 {confirming === false ? (
                                   <>
-                                    {isConnected && chain?.id === 56 ? (
+                                    {isConnected && chain?.id === 1 ? (
                                       <>
                                         <button
                                           disabled={
@@ -1052,19 +1054,19 @@ const App = () => {
                                   </>
                                 ) : (
                                   <>
-                                    {chain?.id === 56 ? (
+                                    {chain?.id === 1 ? (
                                       <></>
                                     ) : (
                                       <button
                                         className="navConnectButton"
                                         type="submit"
                                         onClick={() =>
-                                          switchNetwork?.(56)
+                                          switchNetwork?.(1)
                                         }
                                       >
-                                        {t('main.SwitchToBNB')}
+                                        {t('main.SwitchToETH')}
                                         {isLoading &&
-                                          pendingChainId === 56 &&
+                                          pendingChainId === 1 &&
                                           ' (switching)'}
                                       </button>
                                     )}

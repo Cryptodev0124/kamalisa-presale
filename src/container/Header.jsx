@@ -260,7 +260,7 @@ function Header() {
               </>
             ) : (
               <section className={styles.ConnectWalletSection}>
-                {chain?.id === 56 ? (
+                {chain?.id === 1 ? (
                     <button
                       className="navConnectButton"
                       type="submit"
@@ -272,10 +272,10 @@ function Header() {
                     <button
                       className="navConnectButton"
                       type="submit"
-                      onClick={() => switchNetwork?.(56)}
+                      onClick={() => switchNetwork?.(1)}
                     >
-                      {'BSC'}
-                      {isLoading && pendingChainId === 56 && ''}
+                      {'ETHEREUM'}
+                      {isLoading && pendingChainId === 1 && ''}
                     </button>
                   )}
               </section>
